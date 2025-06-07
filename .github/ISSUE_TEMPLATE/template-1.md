@@ -1,7 +1,6 @@
 ---
 name: Tool doesn't work on some engine builds/mods
-about: Use this in case you encountered issues with tool on some mods or engine builds.
-  Please, report according to presented scheme.
+about: Use this in case you encountered issues with tool on some mods or engine builds. Please, report according to presented scheme.
 title: ''
 labels: ''
 assignees: ''
