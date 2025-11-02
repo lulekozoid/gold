@@ -241,7 +241,7 @@ float CLocalPlayer::GetFloatUserVar(size_t index) const
 bool CLocalPlayer::IsThirdPersonForced() const
 {
     bool playerDead = PredictionDataValid() ? m_pPlayerMove->dead : false;
-    return ConVars::gsm_thirdperson->value > 0.0f && playerDead;
+    return ConVars::gsm_thirdperson->value > 0.0f && !playerDead;
 }
 
 float CLocalPlayer::GetThirdPersonCameraDist() const

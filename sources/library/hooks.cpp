@@ -50,8 +50,13 @@ NOINLINE static void __cdecl HookDrawTriangles()
 
 NOINLINE static int __cdecl HookIsThirdPerson()
 {
-    int returnCode = PLH::FnCast(CHooks::Impl::m_hookIsThirdPerson.GetTrampolineAddr(), CHooks::Impl::pfnIsThirdPerson_t())();
-    return (returnCode || g_Application.GetLocalPlayer().IsThirdPersonForced()) ? 1 : 0;
+    int originalStatus = PLH::FnCast(CHooks::Impl::m_hookIsThirdPerson.GetTrampolineAddr(), CHooks::Impl::pfnIsThirdPerson_t())();
+    if (g_Application.GetLocalPlayer().IsThirdPersonForced()) {
+        return 1;
+    }
+    else {
+        return originalStatus;
+    }
 }
 
 NOINLINE static void __cdecl HookCameraOffset(float *cameraOffset)
