@@ -1,0 +1,35 @@
+name: Build GoldSrc Monitor
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: microsoft/setup-msbuild@v2
+
+      - uses: nuget/setup-nuget@v2
+
+      - name: Restore packages
+        run: nuget restore goldsrc-monitor.sln
+
+      - name: Build
+        run: |
+          msbuild goldsrc-monitor.sln ^
+            /p:Configuration=Release ^
+            /p:Platform=x86
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goldsrc-monitor
+          path: |
+            **/Release/*.exe
+            **/Release/*.dll
